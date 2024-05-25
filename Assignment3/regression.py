@@ -45,11 +45,11 @@ def fit_regression_model(X, y):
     for epoch in range(1, num_epochs):
         loss = train_iteration(X, y, model, loss_fn, optimizer)
         if (
-            (previos_loss - loss) < .1
+            (previos_loss - loss) < .01
         ):  # Change this condition to stop the training when the loss is not changing much.
             break
         previos_loss = loss.item()
         # This is a good place to print the loss every 1000 epochs.
-        if epoch % 1000 == 0:
-            print(loss)
+        if epoch % 10 == 0:
+            print(epoch, loss)
     return model, loss

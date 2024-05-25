@@ -67,8 +67,6 @@ def get_train_data(dim=1):
 def test_fit_regression_model_1d():
     X, y = get_train_data(dim=1)
     model, loss = fit_regression_model(X, y)
-    print(loss)
-
     assert loss.item() < 4321, " loss too big"
 
 
@@ -83,7 +81,6 @@ def test_fit_and_predict_regression_model_1d():
     model, loss = fit_regression_model(X, y)
     X_test = torch.tensor([[20.0], [15.0], [10.0]])
     y_pred = model(X_test)
-    print(y_pred)
     assert (
         (y_pred - torch.tensor([[1252.3008], [939.9971], [627.6935]])).abs() < 2
     ).all(), " y_pred is not correct"
