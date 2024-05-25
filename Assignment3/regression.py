@@ -31,14 +31,14 @@ def fit_regression_model(X, y):
     Hint 3: you can use the previos_loss variable to stop the training when the loss is not changing much.
     """
     learning_rate = 0.01  # Pick a better learning rate
-    num_epochs = 100  # Pick a better number of epochs
-    input_features = 0  # extract the number of features from the input `shape` of X
-    output_features = 0  # extract the number of features from the output `shape` of y
+    num_epochs = 500  # Pick a better number of epochs
+    input_features = X.shape[1]  # extract the number of features from the input `shape` of X
+    output_features = y.shape[1]  # extract the number of features from the output `shape` of y
     model = create_linear_regression_model(input_features, output_features)
 
     loss_fn = nn.L1Loss()  # Use mean squared error loss, like in class
 
-    optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
+    optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate, momentum=0.9)
 
     previos_loss = float("inf")
 
@@ -49,5 +49,6 @@ def fit_regression_model(X, y):
         ):  # Change this condition to stop the training when the loss is not changing much.
             break
         previos_loss = loss.item()
+        print(loss)
         # This is a good place to print the loss every 1000 epochs.
     return model, loss
